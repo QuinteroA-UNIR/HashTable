@@ -134,13 +134,14 @@ public class HashTable<T> {
 	 * @return boolean value, true if
 	 * the value is inside. false otherwise.
 	 */
-	public boolean containsValue(T value) {
+	public String containsValue(T value) {
 		for (LinkedList<Pair<String, T>> list : buckets) {
-			if (hasValue(value,list) != null) {
-				return true;
+			Pair<String, T> pair = hasValue(value,list);
+			if (pair != null) {
+				return pair.getKey();
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	/**

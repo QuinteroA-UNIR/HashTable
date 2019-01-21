@@ -1,5 +1,11 @@
 package hashTable;
 
+/**
+ * Class that shows a real life exmaple of a hash table
+ * being used as a telephone agenda.
+ * @author Arnaldo Quintero Segura
+ *
+ */
 public class MainExample {
 	
 	// Funcion ayudante para imprimir valores tecnicos como
