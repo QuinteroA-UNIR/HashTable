@@ -1,188 +1,159 @@
 package hashTable;
 
 public class MainExample {
+	
+	// Funcion ayudante para imprimir valores tecnicos como
+	// la cantidad de elementos y el factor de carga de la
+	// tabla de hash.
+	public static void technicalStats(HashTable<Integer> h) {
+		// Cantidad de elementos en la lista
+		System.out.println("    -- Valores tecnicos:");
+		System.out.println("       Elementos insertados: " + h.getSize());
+		System.out.println("       Factor de carga: " + h.getLoadFactor());
+	}
 
 	public static void main(String[] args) {
-		//creacion
+		
+		// Variable temporal utilizada para almacenar los resultados
+		// de las distintas operaciones que se realizaran a lo largo
+		// de este ejemplo.
+		Object res = null;
+
+		// Introduccion del ejemplo real
+		System.out.println("Para este caso de ejemplo, se tomará como ejemplo real");
+		System.out.println("el caso de una agenda telefonica. Donde el nombre de la");
+		System.out.println("persona es la clave, y el numero su valor. Debe tomarse");
+		System.out.println("en cuenta que dicha agenda no permite dos contactos con el");
+		System.out.println("mismo nombre. Procedamos a demostrar el ejemplo:");
+		
+		// Creacion y muestra de la lista vacía
 		HashTable<Integer> h = new HashTable<Integer>();
-		//impresion lista vacia
-		h.print();
-		
-		//buscar elemento en lista vacia
-		Object res = h.get("lunes");
-		System.out.println(res);
-		
-		//tamaño
-		res = h.getSize();
-		System.out.println(res);
-		
-		//factor de redispersion
-		res = h.getLoadFactor();
-		System.out.println(res);
-		
-		//contains key
-		res = h.containsKey("lunes");
-		System.out.println(res);
-		
-		//contains value
-		res = h.containsValue(100);
-		System.out.println(res);
+		System.out.println();
+		System.out.println("-- Creacion de la agenda");
+		System.out.println("    Agenda actual: " + h);
 		
 		
+		// Buscar elemento en lista vacia
+		res = h.get("Juan");
+		System.out.println();
+		System.out.println("-- Busqueda de persona inexistente: Juan");
+		System.out.println("    Resultado: " + res);
 		
-		//insercion
-		res = h.put("lunes", 12);
-		h.print();
+		// Elementos tecnicos
+		technicalStats(h);
 		
-		//buscar elemento en lista vacia
-		res = h.get("lunes");
-		System.out.println(res);
+		// Insercion de elementos en la tabla
+		res = h.put("Juan", 681123456);
+		System.out.println();
+		System.out.println("-- Insercion de persona a la lista: (Juan, 681123456)");
+		System.out.println("    Resultado: " + res);
+		System.out.println("    Agenda actual: " + h);
 		
-		//tamaño
-		res = h.getSize();
-		System.out.println(res);
+		// Buscar elemento en lista
+		res = h.containsKey("Juan");
+		System.out.println();
+		System.out.println("-- Busqueda de persona existente: Juan");
+		System.out.println("    Resultado: " + res);
 		
-		//factor de redispersion
-		res = h.getLoadFactor();
-		System.out.println(res);
-		
-		//contains key
-		res = h.containsKey("lunes");
-		System.out.println(res);
-		
-		//contains value
-		res = h.containsValue(100);
-		System.out.println(res);
+		// Elementos tecnicos
+		technicalStats(h);
+	
+		// Insercion de 4 personas mas
 		
 		
 		
-		//reinsercion
-		res = h.put("lunes", 12);
-		h.print();
 		
-		//buscar elemento en lista vacia
-		res = h.get("lunes");
-		System.out.println(res);
+		System.out.println();
+		System.out.println("-- Insercion de 4 personas a la lista:");
+		System.out.println("        (Andres, 682123456), (Pedro, 683123456)");
+		System.out.println("        (Maria, 684123456), (Luis, 685123456)");
+
+		res = h.put("Andres", 682123456);
+		System.out.println("    Insercion Andres: " + res);
+		technicalStats(h);
+
+		res = h.put("Pedro", 683123456);
+		System.out.println("    Insercion Pedro: " + res);
+		technicalStats(h);
+
+		res = h.put("Maria", 684123456);
+		System.out.println("    Insercion Maria: " + res);
+		technicalStats(h);
+
+		res = h.put("Luis", 682523456);
+		System.out.println("    Insercion Luis: " + res);
+		technicalStats(h);
+
+		System.out.println("    Agenda actual: " + h);
 		
-		//tamaño
-		res = h.getSize();
-		System.out.println(res);
+		// Busqueda por numero telefonico
+		res = h.containsValue(683123456);
+		System.out.println();
+		System.out.println("-- Busqueda por numero telefonico: 683123456");
+		System.out.println("    Resultado: " + res);
 		
-		//factor de redispersion
-		res = h.getLoadFactor();
-		System.out.println(res);
+		// Busqueda por nombre, para obtener el numero
+		res = h.get("Maria");
+		System.out.println();
+		System.out.println("-- Busqueda por nombre, para obterner el numero: Maria");
+		System.out.println("    Resultado: (Maria, " + res + ")");
 		
-		//contains key
-		res = h.containsKey("lunes");
-		System.out.println(res);
+		// Elementos tecnicos
+		technicalStats(h);
 		
-		//contains value
-		res = h.containsValue(12);
-		System.out.println(res);
+		// Reinsercion de un nombre existente
+		res = h.put("Luis", 999999999);
+		System.out.println();
+		System.out.println("-- Reinsercion de un nombre existente: Luis, nuevo valor '999999999'");
+		System.out.println("    Resultado: " + res);
+
+		// Muestra de que el elemento no ha cambiado
+		res = h.get("Luis");
+		System.out.println("-- Muestra de que el elemento no fue cambiado:");
+		System.out.println("    Resultado: (Luis, " + res + ")");
+		System.out.println("    Agenda actual: " + h);
+		
+		technicalStats(h);
+		
+		// Reemplazar un valor en la agenda
+		res = h.replace("Luis", 999999999);
+		System.out.println();
+		System.out.println("-- Reemplazar numero telefonico: Luis, nuevo valor 999999999");
+		System.out.println("    Resultado: " + res);
+		System.out.println("    Agenda actual: " + h);
 		
 		
-		// nuevo elem
-		res = h.put("martes", 12);
-		h.print();
+		// Eliminar todos los elementos de la lista
+		System.out.println();
+		System.out.println("-- Remover uno a uno todos los elementos de la list:");
+		res = h.remove("Juan");
+		System.out.println("    Remover Juan: " + res);
+		System.out.println("    Agenda actual: " + h);
+		technicalStats(h);
 		
-		//buscar elemento en lista vacia
-		res = h.get("martes");
-		System.out.println(res);
-		
-		//tamaño
-		res = h.getSize();
-		System.out.println(res);
-		
-		//factor de redispersion
-		res = h.getLoadFactor();
-		System.out.println(res);
-		
-		//contains key
-		res = h.containsKey("martes");
-		System.out.println(res);
-		
-		//contains value
-		res = h.containsValue(12);
-		System.out.println(res);
-		
-		// nuevo elem
-				res = h.put("miercoles", 12);
-				h.print();
-				
-				//buscar elemento en lista vacia
-				res = h.get("martes");
-				System.out.println(res);
-				
-				//tamaño
-				res = h.getSize();
-				System.out.println(res);
-				
-				//factor de redispersion
-				res = h.getLoadFactor();
-				System.out.println(res);
-				
-				//contains key
-				res = h.containsKey("martes");
-				System.out.println(res);
-				
-				//contains value
-				res = h.containsValue(12);
-				System.out.println(res);
-				
-				
-				// nuevo elem
-				res = h.put("jueves", 12);
-				h.print();
-				
-				//buscar elemento en lista vacia
-				res = h.get("martes");
-				System.out.println(res);
-				
-				//tamaño
-				res = h.getSize();
-				System.out.println(res);
-				
-				//factor de redispersion
-				res = h.getLoadFactor();
-				System.out.println(res);
-				
-				//contains key
-				res = h.containsKey("martes");
-				System.out.println(res);
-				
-				//contains value
-				res = h.containsValue(12);
-				System.out.println(res);
-				
-				
-				
-				
-				
-				
-				
-				//replace
-				res = h.replace("lunes", 11);
-				System.out.println(res);
-				res = h.replace("asd", 11);
-				System.out.println(res);
-				h.print();
-				
-				//replace
-				res = h.remove("lunes");
-				System.out.println(res);
-				res = h.remove("asd");
-				System.out.println(res);
-				res = h.remove("jueves");
-				System.out.println(res);
-				h.print();
-				
-				res = h.remove("miercoles");
-				System.out.println(res);
-				h.print();
-				res = h.remove("martes");
-				System.out.println(res);
-				h.print();
-				
+		System.out.println();
+		res = h.remove("Andres");
+		System.out.println("    Remover Andres: " + res);
+		System.out.println("    Agenda actual: " + h);
+		technicalStats(h);
+
+		System.out.println();
+		res = h.remove("Pedro");
+		System.out.println("    Remover Pedro: " + res);
+		System.out.println("    Agenda actual: " + h);
+		technicalStats(h);
+
+		System.out.println();
+		res = h.remove("Maria");
+		System.out.println("    Remover Maria: " + res);
+		System.out.println("    Agenda actual: " + h);
+		technicalStats(h);
+
+		System.out.println();
+		res = h.remove("Luis");
+		System.out.println("    Remover Luis: " + res);
+		System.out.println("    Agenda actual: " + h);
+		technicalStats(h);
 				
 	}
 
